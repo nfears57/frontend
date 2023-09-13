@@ -1,0 +1,23 @@
+/* src/components/BlogList.css */
+.blog-list {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+  
+  .blog-list h2 {
+    font-size: 24px;
+  }
+  
+  .blog-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .blog-list li {
+    margin-bottom: 20px;
+  }
+  
+  /* Customize styles as needed */
+  

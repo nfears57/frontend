@@ -1,0 +1,38 @@
+/* src/components/BlogForm.css */
+.blog-form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+  
+  .blog-form h2 {
+    font-size: 24px;
+  }
+  
+  .blog-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .blog-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .blog-form input,
+  .blog-form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .blog-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* Customize styles as needed */
+  
