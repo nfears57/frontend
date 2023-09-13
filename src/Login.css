@@ -1,0 +1,38 @@
+/* src/components/Login.css */
+.login {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+  
+  .login h2 {
+    font-size: 24px;
+  }
+  
+  .login form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .login input {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .login button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* Customize styles as needed */
+  

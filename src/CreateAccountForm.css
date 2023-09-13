@@ -1,0 +1,38 @@
+/* src/components/CreateAccountForm.css */
+.create-account-form {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+  
+  .create-account-form h2 {
+    font-size: 24px;
+  }
+  
+  .create-account-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-account-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .create-account-form input {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .create-account-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* Customize styles as needed */
+  
