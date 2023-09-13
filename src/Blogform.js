@@ -1,6 +1,6 @@
 // src/components/BlogForm.js
 import React, { useState } from 'react';
-import './Blogform.css';
+import './BlogForm.css';
 
 const BlogForm = () => {
   const [title, setTitle] = useState('');
