@@ -1,5 +1,5 @@
-// src/components/CreateAccountForm.js
 import React, { useState } from 'react';
+import axios from 'axios';
 import './CreateAccountForm.css';
 
 const CreateAccountForm = () => {
@@ -7,9 +7,33 @@ const CreateAccountForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your create account logic here
+  const handleChange = event => {
+    const { name, value } = event.target;
+    // Use the appropriate setter function based on the input's name
+    if (name === 'username') {
+      setUsername(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    axios.post('/users', {
+      name: username, // Use the state variables directly
+      password: password,
+      email: email,
+    })
+    .then(response => {
+      console.log(username); // Use the state variable directly
+      console.log(response.data);
+      alert('Account Created!')
+    })
+    .catch(error => {
+      console.log(error);
+    });
   };
 
   return (
@@ -20,9 +44,9 @@ const CreateAccountForm = () => {
           <label htmlFor="username">Username:</label>
           <input
             type="text"
-            id="username"
+            name="username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={handleChange}
             required
           />
         </div>
@@ -30,9 +54,9 @@ const CreateAccountForm = () => {
           <label htmlFor="email">Email:</label>
           <input
             type="email"
-            id="email"
+            name="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChange}
             required
           />
         </div>
@@ -40,9 +64,9 @@ const CreateAccountForm = () => {
           <label htmlFor="password">Password:</label>
           <input
             type="password"
-            id="password"
+            name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
             required
           />
         </div>

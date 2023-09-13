@@ -1,5 +1,5 @@
 // src/components/Categories.js
-import React, {useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import './Categories.css';
 import BlogList from './BlogList'; // Import the BlogList component
 
@@ -14,6 +14,27 @@ const Categories = () => {
   const [showTV, setShowTV] = useState(false)
   const [showLifestyle, setShowLifestyle] = useState(false)
   const [showMisc, setShowMisc] = useState(false)
+  const [selectedTeam, setSelectedTeam] = useState(null);
+  const [categories, setCategories] = useState([]);
+
+  // useEffect(() => {
+  //   // Fetch categories from your API endpoint
+  //   fetch('categories')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // Assuming your API returns an array of category names
+  //       setCategories(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching categories:', error);
+  //     });
+  // }, [])
+
+  const handleTeamClick = (teamName) => {
+    console.log(teamName)
+    setSelectedTeam(teamName);
+  };
+
 
   const toggleMLBTeams = () => {
     setShowMLBTeams(!showMLBTeams);
@@ -145,11 +166,24 @@ const Categories = () => {
     setShowNBATeams(false);
   }
 
+
+
   return (
     <div className="categories">
-      <h2>Categories</h2>
+       <h2>Categories</h2>
       <div className="category-list">
-      <button className="category-btn" onClick={toggleMLBTeams}>
+        {categories.map((category) => (
+          <button
+            key={category}
+            className="category-btn"
+            onClick={() => handleTeamClick(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+      <div className="category-list">
+        <button className="category-btn" onClick={toggleMLBTeams}>
           MLB
         </button>
         <button className="category-btn" onClick={toggleNBATeams}>
@@ -180,203 +214,473 @@ const Categories = () => {
           Misc
         </button>
         {showMLBTeams && (
-        <div className="team-list">
-          <h3>American League East</h3>
-          <button className="team-btn">New York Yankees</button>
-          <button className="team-btn">Boston Red Sox</button>
-          <button className="team-btn">Baltimore Orioles</button>
-          <button className="team-btn">Toronto Blue Jays</button>
-          <button className="team-btn">Tampa Bay Rays</button>
-          <h3>American League Central</h3>
-          <button className="team-btn">Minnesota Twins</button>
-          <button className="team-btn">Kansas City Royals</button>
-          <button className="team-btn">Detroit Tigers</button>
-          <button className="team-btn">Cleveland Guardians</button>
-          <button className="team-btn">Chicago White Sox</button>
-          <h3>American League West</h3>
-          <button className="team-btn">Houston Astros</button>
-          <button className="team-btn">Texas Rangers</button>
-          <button className="team-btn">Oakland A's</button>
-          <button className="team-btn">Los Angeles Angels</button>
-          <button className="team-btn">Seattle Mariners</button>
-          <h3>National League East</h3>
-          <button className="team-btn">New York Mets</button>
-          <button className="team-btn">Atlanta Braves</button>
-          <button className="team-btn">Philadelphia Phillies</button>
-          <button className="team-btn">Miami Marlins</button>
-          <button className="team-btn">Washington Nationals</button>
-          <h3>National League Central</h3>
-          <button className="team-btn">Chicago Cubs</button>
-          <button className="team-btn">St. Louis Cardinals</button>
-          <button className="team-btn">Cincinnati Reds</button>
-          <button className="team-btn">Milwaukee Brewers</button>
-          <button className="team-btn">Pittsburgh Pirates</button>
-          <h3>National League West</h3>
-          <button className="team-btn">Los Angeles Dodgers</button>
-          <button className="team-btn">Arizona Diamondbacks</button>
-          <button className="team-btn">Colorado Rockies</button>
-          <button className="team-btn">San Diego Padres</button>
-          <button className="team-btn">San Francisco Giants</button>
-          {/* Add more MLB teams here */}
-        </div>
+          <div className="team-list">
+            <h3>American League East</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('New York Yankees')}>
+              New York Yankees
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Boston Red Sox')}>
+              Boston Red Sox
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Baltimore Orioles')}>
+              Baltimore Orioles
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Toronto Blue Jays')}>
+              Toronto Blue Jays
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Tampa Bay Rays')}>
+              Tampa Bay Rays
+            </button>
+            <h3>American League Central</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Minnesota Twins')}>
+              Minnesota Twins
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Chicago White Sox')}>
+              Chicago White Sox
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Cleveland Guardians')}>
+              Cleveland Guardians
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Detroit Tigers')}>
+              Detroit Tigers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Kansas City Royals')}>
+              Kansas City Royals
+            </button>
+            <h3>American League West</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Houston Astros')}>
+              Houston Astros
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Texas Rangers')}>
+              Texas Rangers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Seattle Mariners')}>
+              Seattle Mariners
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick("Oakland A's")}>
+              Oakland A's
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Los Angeles Angels')}>
+              Los Angeles Angels
+            </button>
+            <h3>National League East</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('New York Mets')}>
+              New York Mets
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Atlanta Braves')}>
+              Atlanta Braves
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Philadelphia Phillies')}>
+              Philadelphia Phillies
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Miami Marlins')}>
+              Miami Marlins
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Washington Nationals')}>
+              Washington Nationals
+            </button>
+            <h3>National League Central</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Chicago Cubs')}>
+              Chicago Cubs
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Cincinnati Reds')}>
+              Cincinnati Reds
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Pittsburgh Pirates')}>
+              Pittsburgh Pirates
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Milwaukee Brewers')}>
+              Milwaukee Brewers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('St. Louis Cardinals')}>
+              St. Louis Cardinals
+            </button>
+            <h3>National League West</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Los Angeles Dodgers')}>
+              Los Angeles Dodgers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('San Diego Padres')}>
+              San Diego Padres
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('San Francisco Giants')}>
+              San Francisco Giants
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Arizona Diamondbacks')}>
+              Arizona Diamondbacks
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Colorado Rockies')}>
+              Colorado Rockies
+            </button>
+          </div>
         )}
       </div>
       <div className="category-list">
 
         {showNBATeams && (
-        <div className="team-list">
-          <h3>Atlantic</h3>
-          <button className="team-btn">New York Knicks</button>
-          <button className="team-btn">Boston Celtics</button>
-          <button className="team-btn">Brooklyn Nets</button>
-          <button className="team-btn">Toronto Raptors</button>
-          <button className="team-btn">Philadelphia 76ers</button>
-          <h3>Central</h3>
-          <button className="team-btn">Chicago Bulls</button>
-          <button className="team-btn">Cleveland Cavaliers</button>
-          <button className="team-btn">Detroit Pistons</button>
-          <button className="team-btn">Milwaukee Bucks</button>
-          <button className="team-btn">Indiana Pacers</button>
-          <h3>Southeast</h3>
-          <button className="team-btn">Atlanta Hawks</button>
-          <button className="team-btn">Miami Heat</button>
-          <button className="team-btn">Orlando Magic</button>
-          <button className="team-btn">Charlotte Hornets</button>
-          <button className="team-btn">Washinton Wizards</button>
-          <h3>Northwest</h3>
-          <button className="team-btn">Denver Nuggets</button>
-          <button className="team-btn">Minnesota Timberwolves</button>
-          <button className="team-btn">Oklahoma City Thunder</button>
-          <button className="team-btn">Portland Trail Blazers</button>
-          <button className="team-btn">Utah Jazz</button>
-          <h3>Pacific</h3>
-          <button className="team-btn">Sacramento Kings</button>
-          <button className="team-btn">Golden State Warrios</button>
-          <button className="team-btn">Los Angeles Clippers</button>
-          <button className="team-btn">Los Angeles Lakers</button>
-          <button className="team-btn">Phoenix Suns</button>
-          <h3>Southwest</h3>
-          <button className="team-btn">Memphis Grizzlies</button>
-          <button className="team-btn">New Orleans Pelicans</button>
-          <button className="team-btn">Dallas Mavericks</button>
-          <button className="team-btn">Houston Rockets</button>
-          <button className="team-btn">San Antonio Spurs</button>
-          {/* Add more NBA teams here */}
-        </div>
+          <div className="team-list">
+            <h3>Atlantic</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('New York Knicks')}>
+              New York Knicks
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Boston Celtics')}>
+              Boston Celtics
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Brooklyn Nets')}>
+              Brooklyn Nets
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Toronto Raptors')}>
+              Toronto Raptors
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Philadelphia 76ers')}>
+              Philadelphia 76ers
+            </button>
+
+            <h3>Central</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Chicago Bulls')}>
+              Chicago Bulls
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Cleveland Cavaliers')}>
+              Cleveland Cavaliers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Detroit Pistons')}>
+              Detroit Pistons
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Milwaukee Bucks')}>
+              Milwaukee Bucks
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Indiana Pacers')}>
+              Indiana Pacers
+            </button>
+
+            <h3>Southeast</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Atlanta Hawks')}>
+              Atlanta Hawks
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Miami Heat')}>
+              Miami Heat
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Orlando Magic')}>
+              Orlando Magic
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Charlotte Hornets')}>
+              Charlotte Hornets
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Washington Wizards')}>
+              Washington Wizards
+            </button>
+
+            <h3>Northwest</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Denver Nuggets')}>
+              Denver Nuggets
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Minnesota Timberwolves')}>
+              Minnesota Timberwolves
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Oklahoma City Thunder')}>
+              Oklahoma City Thunder
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Portland Trail Blazers')}>
+              Portland Trail Blazers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Utah Jazz')}>
+              Utah Jazz
+            </button>
+
+            <h3>Pacific</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Sacramento Kings')}>
+              Sacramento Kings
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Golden State Warriors')}>
+              Golden State Warriors
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Los Angeles Clippers')}>
+              Los Angeles Clippers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Los Angeles Lakers')}>
+              Los Angeles Lakers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Phoenix Suns')}>
+              Phoenix Suns
+            </button>
+
+            <h3>Southwest</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Memphis Grizzlies')}>
+              Memphis Grizzlies
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('New Orleans Pelicans')}>
+              New Orleans Pelicans
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Dallas Mavericks')}>
+              Dallas Mavericks
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Houston Rockets')}>
+              Houston Rockets
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('San Antonio Spurs')}>
+              San Antonio Spurs
+            </button>
+
+            {/* Repeat this pattern for other divisions */}
+          </div>
         )}
+
       </div>
       <div className="category-list">
-   
+
         {showNFLTeams && (
-        <div className="team-list">
-          <h3>AFC East</h3>
-          <button className="team-btn">New York Jets</button>
-          <button className="team-btn">New England Patriots</button>
-          <button className="team-btn">Buffalo Bills</button>
-          <button className="team-btn">Miami Dolphins</button>
-          <h3>AFC North</h3>
-          <button className="team-btn">Cleveland Browns</button>
-          <button className="team-btn">Cincinnati Bengals</button>
-          <button className="team-btn">Pittsburgh Steelers</button>
-          <button className="team-btn">Baltimore Ravens</button>
-          <h3>AFC South</h3>
-          <button className="team-btn">Jacksonville Jaguars</button>
-          <button className="team-btn">Indianapolis Colts</button>
-          <button className="team-btn">Tennessee Titans</button>
-          <button className="team-btn">Houston Texans</button>
-          <h3>AFC West</h3>
-          <button className="team-btn">Las Vegas Raiders</button>
-          <button className="team-btn">Kansas City Chiefs</button>
-          <button className="team-btn">Los Angeles Chargers</button>
-          <button className="team-btn">Denver Broncos</button>
-          <h3>NFC East</h3>
-          <button className="team-btn">New York Giants</button>
-          <button className="team-btn">Philadelphia Eagles</button>
-          <button className="team-btn">Dallas Cowboys</button>
-          <button className="team-btn">Washinton Commanders</button>
-          <h3>NFC North</h3>
-          <button className="team-btn">Green Bay Packers</button>
-          <button className="team-btn">Chicago Bears</button>
-          <button className="team-btn">Detroit Lions</button>
-          <button className="team-btn">Minnesota Vikings</button>
-          <h3>NFC South</h3>
-          <button className="team-btn">Atlanta Falcons</button>
-          <button className="team-btn">Carolina Panthers</button>
-          <button className="team-btn">Tampa Bay Buccaneers</button>
-          <button className="team-btn">New Orleans Saints</button>
-          <h3>NFC West</h3>
-          <button className="team-btn">Arizona Carindals</button>
-          <button className="team-btn">San Francisco 49ers</button>
-          <button className="team-btn">Los Angeles Rams</button>
-          <button className="team-btn">Seattle Seahawks</button>
-          {/* Add more NFL teams here */}
-        </div>
+          <div className="team-list">
+            <h3>AFC East</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('New York Jets')}>
+              New York Jets
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('New England Patriots')}>
+              New England Patriots
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Buffalo Bills')}>
+              Buffalo Bills
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Miami Dolphins')}>
+              Miami Dolphins
+            </button>
+
+            <h3>AFC North</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Cleveland Browns')}>
+              Cleveland Browns
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Cincinnati Bengals')}>
+              Cincinnati Bengals
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Pittsburgh Steelers')}>
+              Pittsburgh Steelers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Baltimore Ravens')}>
+              Baltimore Ravens
+            </button>
+
+            <h3>AFC South</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Jacksonville Jaguars')}>
+              Jacksonville Jaguars
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Indianapolis Colts')}>
+              Indianapolis Colts
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Tennessee Titans')}>
+              Tennessee Titans
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Houston Texans')}>
+              Houston Texans
+            </button>
+
+            <h3>AFC West</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Las Vegas Raiders')}>
+              Las Vegas Raiders
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Kansas City Chiefs')}>
+              Kansas City Chiefs
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Los Angeles Chargers')}>
+              Los Angeles Chargers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Denver Broncos')}>
+              Denver Broncos
+            </button>
+
+            <h3>NFC East</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('New York Giants')}>
+              New York Giants
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Philadelphia Eagles')}>
+              Philadelphia Eagles
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Dallas Cowboys')}>
+              Dallas Cowboys
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Washington Commanders')}>
+              Washington Commanders
+            </button>
+
+            <h3>NFC North</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Green Bay Packers')}>
+              Green Bay Packers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Chicago Bears')}>
+              Chicago Bears
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Detroit Lions')}>
+              Detroit Lions
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Minnesota Vikings')}>
+              Minnesota Vikings
+            </button>
+
+            <h3>NFC South</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Atlanta Falcons')}>
+              Atlanta Falcons
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Carolina Panthers')}>
+              Carolina Panthers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Tampa Bay Buccaneers')}>
+              Tampa Bay Buccaneers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('New Orleans Saints')}>
+              New Orleans Saints
+            </button>
+
+            <h3>NFC West</h3>
+            <button className="team-btn" onClick={() => handleTeamClick('Arizona Cardinals')}>
+              Arizona Cardinals
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('San Francisco 49ers')}>
+              San Francisco 49ers
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Los Angeles Rams')}>
+              Los Angeles Rams
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Seattle Seahawks')}>
+              Seattle Seahawks
+            </button>
+
+            {/* Add more NFL teams here */}
+          </div>
         )}
+
       </div>
       <div className='category-list'>
         {showCollegeFootball && (
           <div className="team-list">
-          <button className="team-btn">ACC</button>
-          <button className="team-btn">SEC</button>
-          <button className="team-btn">Big 12</button>
-          <button className="team-btn">Big 10</button>
-          <button className="team-btn">Pac 12</button>
-        </div>
-            )}
+            <button className="team-btn" onClick={() => handleTeamClick('ACC')}>
+              ACC
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('SEC')}>
+              SEC
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Big 12')}>
+              Big 12
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Big 10')}>
+              Big 10
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Pac 12')}>
+              Pac 12
+            </button>
+          </div>
+        )}
       </div>
+
       <div className='category-list'>
         {showCollegeBasketball && (
           <div className="team-list">
-          <button className="team-btn">ACC</button>
-          <button className="team-btn">SEC</button>
-          <button className="team-btn">Big 12</button>
-          <button className="team-btn">Big 10</button>
-          <button className="team-btn">Pac 12</button>
-          <button className="team-btn">AAC</button>
-          <button className="team-btn">Mountain West</button>
-        </div>
-            )}
+            <button className="team-btn" onClick={() => handleTeamClick('ACC')}>
+              ACC
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('SEC')}>
+              SEC
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Big 12')}>
+              Big 12
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Big 10')}>
+              Big 10
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Pac 12')}>
+              Pac 12
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('AAC')}>
+              AAC
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Mountain West')}>
+              Mountain West
+            </button>
+          </div>
+        )}
       </div>
+
       <div className='category-list'>
         {showMusic && (
           <div className="team-list">
-          <button className="team-btn">Pop</button>
-          <button className="team-btn">Hip/Hop</button>
-          <button className="team-btn">R&B</button>
-          <button className="team-btn">Country</button>
-          <button className="team-btn">Rock</button>
-          <button className="team-btn">Alternative</button>
-          <button className="team-btn">Indie</button>
-          <button className="team-btn">Folk</button>
-        </div>
-            )}
+            <button className="team-btn" onClick={() => handleTeamClick('Pop')}>
+              Pop
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Hip/Hop')}>
+              Hip/Hop
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('R&B')}>
+              R&B
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Country')}>
+              Country
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Rock')}>
+              Rock
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Alternative')}>
+              Alternative
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Indie')}>
+              Indie
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Folk')}>
+              Folk
+            </button>
+          </div>
+        )}
       </div>
+
       <div className='category-list'>
         {showMovies && (
           <div className="team-list">
-          <button className="team-btn">Action</button>
-          <button className="team-btn">Thriller</button>
-          <button className="team-btn">Drama</button>
-          <button className="team-btn">Comedy</button>
-          <button className="team-btn">Romantic Comedy</button>
-          <button className="team-btn">Horror</button>
-          <button className="team-btn">Biopics</button>
-          <button className="team-btn">Sci-Fi</button>
-          <button className="team-btn">Sports</button>
-          <button className="team-btn">Animated</button>
-        </div>
-            )}
+            <button className="team-btn" onClick={() => handleTeamClick('Action')}>
+              Action
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Thriller')}>
+              Thriller
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Drama')}>
+              Drama
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Comedy')}>
+              Comedy
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Romantic Comedy')}>
+              Romantic Comedy
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Horror')}>
+              Horror
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Biopics')}>
+              Biopics
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Sci-Fi')}>
+              Sci-Fi
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Sports')}>
+              Sports
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Animated')}>
+              Animated
+            </button>
+          </div>
+        )}
       </div>
+
       <div className='category-list'>
         {showTV && (
           <div className="team-list">
-          <button className="team-btn">Comedy</button>
-          <button className="team-btn">Drama</button>
-          <button className="team-btn">Docuseries</button>
-        </div>
-            )}
+            <button className="team-btn" onClick={() => handleTeamClick('Comedy')}>
+              Comedy
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Drama')}>
+              Drama
+            </button>
+            <button className="team-btn" onClick={() => handleTeamClick('Docuseries')}>
+              Docuseries
+            </button>
+          </div>
+        )}
       </div>
-      <BlogList /> {/* Include the BlogList component */}
+
+      <BlogList teamName={selectedTeam} />
     </div>
   );
 };

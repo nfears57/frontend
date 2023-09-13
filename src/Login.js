@@ -3,13 +3,46 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import the Link component
 import './Login.css';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const Login = ({onLogin}) => {
+    const [form, setForm] = useState({
+        email: "",
+        password: "",
+      })
+      const [errors, setErrors] = useState(null)
     
+      function handleChange(e) {
+        const value = e.target.value;
+        const keyName = e.target.name;
+        setForm({ ...form, [keyName]: value })
+      }
+      
+      const handleSubmit = (e) => {
+    e.preventDefault()
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((user) => {
+          onLogin(user)
+          console.log(user)
+          setErrors(null);
+          window.location.href = '/';
+        })
+      } else {
+        r.json().then(errors => setErrors(errors))
+      }
+    }).catch((error) => {
+      console.error("Error:", error);
+    });
+
+    setForm({
+      email: "",
+      password: "",
+    })
   };
 
   return (
@@ -20,9 +53,9 @@ const Login = () => {
           <label htmlFor="email">Email:</label>
           <input
             type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={form.email}
+            onChange={(handleChange)}
             required
           />
         </div>
@@ -30,9 +63,9 @@ const Login = () => {
           <label htmlFor="password">Password:</label>
           <input
             type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={form.password}
+            onChange={(handleChange)}
             required
           />
         </div>
