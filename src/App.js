@@ -5,6 +5,7 @@ import HomePage from './HomePage';
 import Profile from './Profile';
 import Login from './Login';
 import CreateAccountForm from './CreateAccountForm';
+import Categories from './Categories'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create-account" element={<CreateAccountForm />} />
+        <Route path="/categories" element={<Categories />} />
       </Routes>
     </Router>
   );
