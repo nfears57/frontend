@@ -1,8 +1,8 @@
 // src/components/HomePage.js
 import React, { useState } from 'react';
 import './HomePage.css';
-import BlogForm from './BlogForm'; // Correct the component name to 'BlogForm'
-
+import BlogForm from './BlogForm';
+import BlogList from './BlogList';
 
 const HomePage = () => {
   const [showBlogForm, setShowBlogForm] = useState(false);
@@ -20,16 +20,17 @@ const HomePage = () => {
       <div className="home-content">
         <div className="home-left">
           <h1>The New Timers</h1>
+          { <BlogList />}
           <p></p>
         </div>
-        <div className="home-left">
+        <div className="home-right">
           {showBlogForm ? (
             <div>
               <button onClick={handleCloseForm}>X</button>
               <BlogForm />
             </div>
           ) : (
-            <button onClick={handleNewBlogClick}>New Blog</button>
+            <button className="new-blog-button" onClick={handleNewBlogClick}>New Blog</button>
           )}
         </div>
       </div>

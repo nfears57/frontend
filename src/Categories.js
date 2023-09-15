@@ -679,8 +679,8 @@ const Categories = () => {
           </div>
         )}
       </div>
-
-      <BlogList teamName={selectedTeam} />
+{/* 
+      <BlogList teamName={selectedTeam} /> */}
     </div>
   );
 };
